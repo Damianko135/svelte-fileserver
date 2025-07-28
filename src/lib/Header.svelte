@@ -27,7 +27,9 @@
 	];
 </script>
 
-<header class="bg-primary-full text-primary-full flex flex-row items-center p-4">
+<header
+	class="bg-primary bg-opacity-50 text-primary-full flex flex-row items-center p-4 px-12 pt-8 backdrop-blur-md"
+>
 	<div class="flex w-fit items-center space-x-4">
 		<img src="favicon.png" alt="website logo" class="h-8 w-8" />
 		<h1>Minecraft World Archive</h1>

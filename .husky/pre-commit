@@ -1,2 +1,39 @@
-pnpm run format
-pnpm run lint
+#!/bin/sh
+set -eo pipefail
+
+# husky pre-commit hook
+# git hooks use POSIX sh, so we can use sh for checking certain commands
+# Determine the right manager to use
+
+check_command() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        return 1
+    fi
+}
+
+success() {
+    echo "SUCCESS: FOUND $MANAGER, running pre-commit tasks..."
+}
+
+
+if check_command pnpm; then
+    MANAGER="pnpm"
+    success "$MANAGER"
+elif check_command yarn; then
+    MANAGER="yarn"
+    success "$MANAGER"
+elif check_command bun; then
+    MANAGER="bun"
+    success "$MANAGER"
+elif check_command npm; then
+    MANAGER="npm"
+    success "$MANAGER"
+else
+    echo "No package manager found. Please install pnpm or npm."
+    exit 1
+fi
+
+${MANAGER} run format
+${MANAGER} run lint
+${MANAGER} run test
+exit $?

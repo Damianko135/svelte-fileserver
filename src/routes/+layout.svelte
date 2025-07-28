@@ -9,6 +9,8 @@
 </script>
 
 <Header />
-{@render children()}
+<main class="flex min-h-screen flex-col p-4 text-center">
+	{@render children()}
+</main>
 <Footer />
 <Toaster {toaster}></Toaster>
