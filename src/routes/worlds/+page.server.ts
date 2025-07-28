@@ -23,7 +23,7 @@ export const load: PageServerLoad = async () => {
 				}
 			}
 		}
-		console.log(JSON.stringify(worlds, null, 2));
+		// console.log(JSON.stringify(worlds, null, 2));
 		return { worlds };
 	} catch (error) {
 		console.error('Error locating directory:', error);
