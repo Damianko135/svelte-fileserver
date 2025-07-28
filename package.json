@@ -58,6 +58,7 @@
 	"dependencies": {
 		"@lucide/svelte": "^0.529.0",
 		"drizzle-orm": "^0.44.3",
+		"flexsearch": "^0.8.205",
 		"mysql2": "^3.14.2"
 	},
 	"pnpm": {
