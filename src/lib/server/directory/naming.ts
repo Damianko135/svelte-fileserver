@@ -1,7 +1,7 @@
 // naming.ts <== naming the data that is being returned from the server
 
 // The naming convention of this project is as follows:
-// - Pattern: `{modpack}_{version}_{edition}_{world_name}.tar.xz`
+// - Pattern: `{modpackGroup}_{modpack}_{version}_{edition}_{world_name}.tar.xz`
 // - Examples: `atm_atm10_v2.42_season2_main.tar.xz`, `tandem_create_season1_default.tar.xz`
 
 function ensureValidName(name: string): string {
@@ -11,17 +11,8 @@ function ensureValidName(name: string): string {
 	return sanitized.trim();
 }
 
-// For the future, we can use this function to format filenames
-// function formatFilename(modpack: string, version: string, edition: string, worldName: string): string {
-//     // Format the filename according to the naming convention
-//     const sanitizedModpack = ensureValidName(modpack);
-//     const sanitizedVersion = ensureValidName(version);
-//     const sanitizedEdition = ensureValidName(edition);
-//     const sanitizedWorldName = ensureValidName(worldName);
-
-//     return `${sanitizedModpack}_${sanitizedVersion}_${sanitizedEdition}_${sanitizedWorldName}.tar.xz`;
-// }
 function extractName(filename: string): {
+	modpackGroup: string;
 	modpack: string;
 	version: string;
 	season: string;
@@ -33,9 +24,10 @@ function extractName(filename: string): {
 		throw new Error('Invalid filename format. Expected at least 4 parts.');
 	}
 
-	const modpack = ensureValidName(parts[0]);
-	const version = ensureValidName(parts[1]);
-	const season = ensureValidName(parts[2]);
+	const modpackGroup = ensureValidName(parts[0]);
+	const modpack = ensureValidName(parts[1]);
+	const version = ensureValidName(parts[2]);
+	const season = ensureValidName(parts[3]);
 	const worldName = ensureValidName(
 		parts
 			.slice(3)
@@ -43,7 +35,7 @@ function extractName(filename: string): {
 			.replace(/\.tar\.xz$/, '')
 	);
 
-	return { modpack, version, season, worldName };
+	return { modpackGroup, modpack, version, season, worldName };
 }
 
 export { ensureValidName, extractName };
